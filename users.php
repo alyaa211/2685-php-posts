@@ -1,37 +1,13 @@
 <?php
-$host = 'localhost';
-$database = '2685_php_posts';
-$user = 'root';
-$password = '';
+include 'load.php';
 
-
-
-function dd($itm)
-{
-    echo '<pre>';
-    var_dump($itm);
-    echo '</pre>';
-}
-
-
-$db = new mysqli($host, $user, $password, $database);
-
-
-$qry = 'SELECT * FROM `pst_users`;';
+$qry = 'SELECT * FROM `pst_users` LIMIT 10;';
 
 $res = $db->query($qry);
 
-
-// $data = mysqli_fetch_all($res);
-// $data = mysqli_fetch_all($res, 2);
-// $data = mysqli_fetch_all($res, MYSQLI_NUM);
+$users = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
 
-// $data = mysqli_fetch_all($res, 1);
-// $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-// $data = mysqli_fetch_all($res, 3);
-$data = mysqli_fetch_all($res, MYSQLI_BOTH);
-
-
-dd($data);
+foreach ($users as $user) {
+    include 'components/users/user.php';
+}
