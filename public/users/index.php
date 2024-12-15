@@ -1,5 +1,5 @@
 <?php
-include 'load.php';
+include '../load.php';
 
 $qry = 'SELECT * FROM `pst_users` LIMIT 10;';
 
@@ -9,5 +9,5 @@ $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
 
 foreach ($users as $user) {
-    include 'components/users/user.php';
+    include '../components/users/user.php';
 }
