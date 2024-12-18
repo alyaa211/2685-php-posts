@@ -7,7 +7,7 @@ $password = '';
 $database = '2685_php_posts';
 
 
-function dd($item, $die = true)
+function dd($item, $die = false)
 {
   echo "<pre>";
   var_dump($item);
