@@ -1,7 +1,7 @@
 <h1>Storing user.....</h1>
 
 <?php
-include '../../load.php';
+include '../load.php';
 
 
 // Save the post data into a variable named old for later use
@@ -12,7 +12,6 @@ $data = $_POST;
 
 // Create an empty array named erros, to store any found errors
 $errors = [];
-
 
 
 // first_name validation
@@ -60,13 +59,43 @@ if (count($errors) > 0) {
     $_SESSION['errors'] = $errors;
 
     // redirect back to the create form
-    header('location: create.php');
+    header('location: create-user.php');
 
 
 } else {
     // We do not have erros
 
     // Save the user to Database
+
+    $name = $data['first_name'] . ' ' . $data['last_name'];
+    $email = $data['email'];
+    $mobile = $data['mobile'];
+    $password = password_hash($data['password'], PASSWORD_DEFAULT);
+    $roles = 'guest';
+
+    $timestamp = date('Y-m-d h:i:s');
+
+
+    $qry = "INSERT INTO `pst_users` 
+        (`name`, `email`, `mobile`, `password`, `roles`, `created_at`, `updated_at`) 
+        VALUES ('$name','$email','$mobile','$password','$roles','$timestamp','$timestamp')";
+
+    if ($db->query($qry)) {
+
+        // Get the id of newly created user
+        $id = $db->insert_id;
+
+        $_SESSION['success'] = 'User Created Successfully';
+
+        header("location: /user.php?id=$id");
+
+    } else {
+
+        // Save not success
+        $_SESSION['save_error'] = 'Cannot add new user!!!';
+
+        header('location: create-user.php');
+    }
 
     // redirect to users page
 }

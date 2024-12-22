@@ -1,9 +1,8 @@
-<?php
-include '../load.php';
+<?php require '../layout/header.php';
+
 
 // Super Global Array $_GET
 $id = $_GET['id'];
-
 $qry = "SELECT * FROM `pst_users` WHERE `id` = '$id';";
 
 
@@ -18,6 +17,8 @@ $res_posts = $db->query($qry_posts);
 $user = mysqli_fetch_object($res);
 $posts = mysqli_fetch_all($res_posts, MYSQLI_ASSOC);
 
+dd($user);
 dd($posts);
 dd($user->name);
- 
+
+require '../layout/footer.php';
