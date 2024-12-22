@@ -2,5 +2,5 @@
     <a href="/users.php">Users</a>
     <a href="/create-user.php">Add User</a>
     <a href="/posts.php">Posts</a>
-    <a href="/posts/create.php">Add Post</a>
+    <a href="/posts/create.php">Add New Post</a>
 </nav>
